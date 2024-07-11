@@ -53,7 +53,7 @@ if [ ! -d .git ]; then
 fi
 
 # Create or update .gitignore file
-cat > .gitignore << EOF
+cat > .gitignore << EOL
 # Sensitive data
 data/payments.txt
 data/payments_backup.txt
@@ -80,19 +80,17 @@ __pycache__/
 *.key
 *.pem
 *.env
-EOF
+EOL
 
 # Ensure the required directory structure exists
-mkdir -p src data output templates
+mkdir -p src data output
 
 # Add all files
 git add .
 git add -f README.md  # Ensure README is added even if ignored
 
 # Commit if there are changes
-if git diff --cached --quiet; then
-    echo "No changes to commit."
-else
+if ! git diff --cached --quiet; then
     git commit -m "Update project structure and files"
     check_command "Failed to commit files"
 fi
