@@ -103,6 +103,17 @@ check_command "Failed to add/update remote"
 # Determine the current branch name
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
+# Fetch the latest changes from the remote
+git fetch origin
+
+# Try to rebase on top of the remote branch
+if git rebase origin/$BRANCH; then
+    echo "Successfully rebased on top of remote branch."
+else
+    echo "Rebase failed. Aborting rebase and forcing push."
+    git rebase --abort
+fi
+
 # Push to GitHub, force with lease to avoid conflicts
 echo "Pushing to GitHub..."
 git push -u origin "$BRANCH" --force-with-lease
