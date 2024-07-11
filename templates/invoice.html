@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>INVOICE</h1>
+            <div class="invoice-number">Invoice #: {{ invoice_number }}</div>
+        </header>
+        <section class="parties">
+            <div class="from">
+                <h2>From:</h2>
+                <p>{{ from }}</p>
+            </div>
+            <div class="to">
+                <h2>To:</h2>
+                <p>{{ to }}</p>
+            </div>
+        </section>
+        <section class="dates">
+            <div class="invoice-date">Invoice Date: {{ invoice_date }}</div>
+            <div class="due-date">Due Date: {{ due_date }}</div>
+        </section>
+        <section class="items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Rate (THB)</th>
+                        <th>Amount (THB)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>1</td>
+                        <td>{{ thb_amount }}</td>
+                        <td>{{ thb_amount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="totals">
+            <div class="total">Total (THB): {{ thb_amount }}</div>
+            <div class="total">Total (USD): {{ usd_amount }}</div>
+            <div class="exchange-rate">Exchange Rate: 1 USD = {{ exchange_rate }} THB</div>
+        </section>
+        <section class="payment-info">
+            <h2>Payment Information</h2>
+            <p>Payment Method: {{ payment_method }}</p>
+        </section>
+        <footer>
+            <p>This is a legal document. Please retain for your records.</p>
+        </footer>
+    </div>
+</body>
+</html>

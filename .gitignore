@@ -1,0 +1,26 @@
+# Sensitive data
+data/payments.txt
+data/payments_backup.txt
+
+# Generated files
+output/
+
+# Python environment
+.venv/
+*.pyc
+__pycache__/
+
+# macOS system files
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Other potential sensitive files
+*.key
+*.pem
+*.env

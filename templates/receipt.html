@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container receipt">
+        <div class="watermark">PAID</div>
+        <header>
+            <h1>RECEIPT</h1>
+            <div class="receipt-number">Receipt #: {{ receipt_number }}</div>
+        </header>
+        <section class="parties">
+            <div class="from">
+                <h2>From:</h2>
+                <p>{{ from }}</p>
+            </div>
+            <div class="to">
+                <h2>To:</h2>
+                <p>{{ to }}</p>
+            </div>
+        </section>
+        <section class="dates">
+            <div class="payment-date">Payment Date: {{ payment_date }}</div>
+            <div class="invoice-reference">Invoice #: {{ invoice_number }}</div>
+        </section>
+        <section class="payment-details">
+            <h2>Payment Details</h2>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount (THB)</th>
+                    <th>Amount (USD)</th>
+                </tr>
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ thb_amount }}</td>
+                    <td>{{ usd_amount }}</td>
+                </tr>
+            </table>
+        </section>
+        <section class="payment-info">
+            <h2>Payment Information</h2>
+            <p>Payment Method: {{ payment_method }}</p>
+            <p>Exchange Rate: 1 USD = {{ exchange_rate }} THB</p>
+        </section>
+        <footer>
+            <p>Thank you for your payment. Please retain this receipt for your records.</p>
+        </footer>
+    </div>
+</body>
+</html>
