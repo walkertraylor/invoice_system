@@ -4,60 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .invoice-details { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .from-to { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .totals { text-align: right; }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <div class="header">
             <h1>INVOICE</h1>
-            <div class="invoice-number">Invoice #: {{ invoice_number }}</div>
-        </header>
-        <section class="parties">
-            <div class="from">
-                <h2>From:</h2>
-                <p>{{ from }}</p>
+        </div>
+        <div class="invoice-details">
+            <div>
+                <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
+                <p><strong>Date:</strong> {{ invoice_date }}</p>
+                <p><strong>Due Date:</strong> {{ due_date }}</p>
             </div>
-            <div class="to">
-                <h2>To:</h2>
-                <p>{{ to }}</p>
+        </div>
+        <div class="from-to">
+            <div>
+                <h3>From:</h3>
+                <p>{{ from | replace('\n', '<br>') | safe }}</p>
             </div>
-        </section>
-        <section class="dates">
-            <div class="invoice-date">Invoice Date: {{ invoice_date }}</div>
-            <div class="due-date">Due Date: {{ due_date }}</div>
-        </section>
-        <section class="items">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Rate (THB)</th>
-                        <th>Amount (THB)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ item }}</td>
-                        <td>1</td>
-                        <td>{{ thb_amount }}</td>
-                        <td>{{ thb_amount }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        <section class="totals">
-            <div class="total">Total (THB): {{ thb_amount }}</div>
-            <div class="total">Total (USD): {{ usd_amount }}</div>
-            <div class="exchange-rate">Exchange Rate: 1 USD = {{ exchange_rate }} THB</div>
-        </section>
-        <section class="payment-info">
-            <h2>Payment Information</h2>
-            <p>Payment Method: {{ payment_method }}</p>
-        </section>
-        <footer>
-            <p>This is a legal document. Please retain for your records.</p>
-        </footer>
+            <div>
+                <h3>To:</h3>
+                <p>{{ to | replace('\n', '<br>') | safe }}</p>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Rate (THB)</th>
+                    <th>Amount (THB)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>1</td>
+                    <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
+                    <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="totals">
+            <p><strong>Total Amount (THB):</strong> {{ '{:,.2f}'.format(thb_amount) }}</p>
+            <p><strong>Amount (USD):</strong> {{ '{:,.2f}'.format(usd_amount) }}</p>
+            <p><strong>Exchange Rate:</strong> 1 USD = {{ '{:.4f}'.format(exchange_rate) }} THB</p>
+        </div>
+        <div>
+            <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+        </div>
     </div>
 </body>
 </html>

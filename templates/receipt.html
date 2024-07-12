@@ -1,55 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container receipt">
-        <div class="watermark">PAID</div>
-        <header>
-            <h1>RECEIPT</h1>
-            <div class="receipt-number">Receipt #: {{ receipt_number }}</div>
-        </header>
-        <section class="parties">
-            <div class="from">
-                <h2>From:</h2>
-                <p>{{ from }}</p>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>RECEIPT</h1>
             </div>
-            <div class="to">
-                <h2>To:</h2>
-                <p>{{ to }}</p>
+            <div class="details">
+                <strong>Receipt Number:</strong> {{ receipt_number }}<br>
+                <strong>Date:</strong> {{ payment_date }}<br>
+                <strong>Invoice Number:</strong> {{ invoice_number }}
             </div>
-        </section>
-        <section class="dates">
-            <div class="payment-date">Payment Date: {{ payment_date }}</div>
-            <div class="invoice-reference">Invoice #: {{ invoice_number }}</div>
-        </section>
-        <section class="payment-details">
-            <h2>Payment Details</h2>
-            <table>
-                <tr>
-                    <th>Description</th>
-                    <th>Amount (THB)</th>
-                    <th>Amount (USD)</th>
-                </tr>
-                <tr>
-                    <td>{{ item }}</td>
-                    <td>{{ thb_amount }}</td>
-                    <td>{{ usd_amount }}</td>
-                </tr>
-            </table>
-        </section>
-        <section class="payment-info">
-            <h2>Payment Information</h2>
-            <p>Payment Method: {{ payment_method }}</p>
-            <p>Exchange Rate: 1 USD = {{ exchange_rate }} THB</p>
-        </section>
-        <footer>
-            <p>Thank you for your payment. Please retain this receipt for your records.</p>
-        </footer>
+            <div class="from-to">
+                <div>
+                    <h3>From:</h3>
+                    {{ from | replace('\n', '<br>') | safe }}
+                </div>
+                <div>
+                    <h3>To:</h3>
+                    {{ to | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+            <div class="table-container">
+                <div class="watermark">PAID</div>
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Rate (THB)</th>
+                        <th>Amount (THB)</th>
+                    </tr>
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>1</td>
+                        <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
+                        <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
+                    </tr>
+                    {% for _ in range(2) %}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="totals">
+                <strong>Total Amount (THB):</strong> {{ '{:,.2f}'.format(thb_amount) }}<br>
+                <strong>Amount (USD):</strong> {{ '{:,.2f}'.format(usd_amount) }}<br>
+                <strong>Exchange Rate:</strong> 1 USD = {{ '{:.4f}'.format(exchange_rate) }} THB
+            </div>
+            <div>
+                <strong>Payment Method:</strong> {{ payment_method }}
+            </div>
+            <div>
+                Thank you for your payment.
+            </div>
+        </div>
     </div>
 </body>
 </html>
