@@ -11,8 +11,16 @@ END_DATE = date(2024, 12, 31)
 CREATE_BACKUP = True
 
 # Constants
-FROM = "David Rucker, PO Box 16656, Chapel Hill, NC 27516, USA"
-TO = "ROBERT W TRAYLOR JR, 1400 Village Square Blvd, #3-80930, Tallahassee, FL 32312, USA"
+FROM = """David Rucker
+PO Box 16656
+Chapel Hill, NC 27516
+USA"""
+
+TO = """ROBERT W TRAYLOR JR
+1400 Village Square Blvd, #3-80930
+Tallahassee, FL 32312
+USA"""
+
 ITEM = "Rental Unit - Sukhumvit House, Apartment 9C"
 THB_AMOUNT = 40000
 

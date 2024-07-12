@@ -1,68 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
-    <style>
-        body { font-family: Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .invoice-details { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        .from-to { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .totals { text-align: right; }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>INVOICE</h1>
-        </div>
-        <div class="invoice-details">
-            <div>
-                <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
-                <p><strong>Date:</strong> {{ invoice_date }}</p>
-                <p><strong>Due Date:</strong> {{ due_date }}</p>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>INVOICE</h1>
             </div>
-        </div>
-        <div class="from-to">
-            <div>
-                <h3>From:</h3>
-                <p>{{ from | replace('\n', '<br>') | safe }}</p>
+            <div class="details">
+                <strong>Invoice Number:</strong> {{ invoice_number }}<br>
+                <strong>Date:</strong> {{ invoice_date.strftime('%Y-%m-%d') }}<br>
+                <strong>Due Date:</strong> {{ due_date.strftime('%Y-%m-%d') }}
             </div>
-            <div>
-                <h3>To:</h3>
-                <p>{{ to | replace('\n', '<br>') | safe }}</p>
+            <div class="from-to">
+                <div>
+                    <h3>From:</h3>
+                    <div class="address">{{ from | replace('\n', '<br>') | safe }}</div>
+                </div>
+                <div>
+                    <h3>To:</h3>
+                    <div class="address">{{ to | replace('\n', '<br>') | safe }}</div>
+                </div>
             </div>
-        </div>
-        <table>
-            <thead>
+            <table>
                 <tr>
                     <th>Description</th>
                     <th>Quantity</th>
                     <th>Rate (THB)</th>
                     <th>Amount (THB)</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>{{ item }}</td>
                     <td>1</td>
                     <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
                     <td>{{ '{:,.2f}'.format(thb_amount) }}</td>
                 </tr>
-            </tbody>
-        </table>
-        <div class="totals">
-            <p><strong>Total Amount (THB):</strong> {{ '{:,.2f}'.format(thb_amount) }}</p>
-            <p><strong>Amount (USD):</strong> {{ '{:,.2f}'.format(usd_amount) }}</p>
-            <p><strong>Exchange Rate:</strong> 1 USD = {{ '{:.4f}'.format(exchange_rate) }} THB</p>
-        </div>
-        <div>
-            <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+            </table>
+            <div class="totals">
+                <strong>Total Amount (THB):</strong> {{ '{:,.2f}'.format(thb_amount) }}<br>
+                <strong>Amount (USD):</strong> {{ '{:,.2f}'.format(usd_amount) }}<br>
+                <strong>Exchange Rate:</strong> 1 USD = {{ '{:.4f}'.format(exchange_rate) }} THB
+            </div>
         </div>
     </div>
 </body>

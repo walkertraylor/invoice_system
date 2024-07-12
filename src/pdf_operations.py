@@ -39,10 +39,14 @@ def create_pdf(template_name, filename, data):
         }
         .details, .from-to {
             margin-bottom: 20px;
+            line-height: 1.8;
         }
         .from-to {
             display: flex;
             justify-content: space-between;
+        }
+        .address {
+            white-space: pre-line;
         }
         .table-container {
             position: relative;
@@ -63,6 +67,7 @@ def create_pdf(template_name, filename, data):
         .totals {
             text-align: right;
             margin-bottom: 20px;
+            line-height: 1.8;
         }
         .watermark {
             position: absolute;
@@ -82,6 +87,10 @@ def create_pdf(template_name, filename, data):
         .content {
             position: relative;
             z-index: 1;
+        }
+        .thank-you {
+            margin-top: 20px;
+            font-style: italic;
         }
     ''', font_config=font_config)
     

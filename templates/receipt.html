@@ -12,17 +12,17 @@
             </div>
             <div class="details">
                 <strong>Receipt Number:</strong> {{ receipt_number }}<br>
-                <strong>Date:</strong> {{ payment_date }}<br>
+                <strong>Date:</strong> {{ payment_date.strftime('%Y-%m-%d') }}<br>
                 <strong>Invoice Number:</strong> {{ invoice_number }}
             </div>
             <div class="from-to">
                 <div>
                     <h3>From:</h3>
-                    {{ from | replace('\n', '<br>') | safe }}
+                    <div class="address">{{ from | replace('\n', '<br>') | safe }}</div>
                 </div>
                 <div>
                     <h3>To:</h3>
-                    {{ to | replace('\n', '<br>') | safe }}
+                    <div class="address">{{ to | replace('\n', '<br>') | safe }}</div>
                 </div>
             </div>
             <div class="table-container">
@@ -58,8 +58,8 @@
             <div>
                 <strong>Payment Method:</strong> {{ payment_method }}
             </div>
-            <div>
-                Thank you for your payment.
+            <div class="thank-you">
+                Thank you for your payment for rent for {{ payment_date.strftime('%B %Y') }}.
             </div>
         </div>
     </div>
