@@ -1,6 +1,5 @@
 from datetime import date
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+from pathlib import Path
 
 # Configuration flags
 GENERATE_MERGED_PDFS = True
@@ -25,9 +24,9 @@ ITEM = "Rental Unit - Sukhumvit House, Apartment 9C"
 THB_AMOUNT = 40000
 
 # PDF settings
-PAGE_SIZE = letter
-TOP_MARGIN = 0.5 * inch
-BOTTOM_MARGIN = 0.5 * inch
+PAGE_SIZE = 'letter'
+TOP_MARGIN = 0.5
+BOTTOM_MARGIN = 0.5
 
 # Company details
 COMPANY_DETAILS = {
@@ -41,5 +40,19 @@ COMPANY_DETAILS = {
 DEFAULT_CURRENCY = "USD"
 TAX_RATE = 0  # Set to 0 if not applicable
 
-# Output settings
-OUTPUT_DIRECTORY = "output"
+# File and directory settings
+INPUT_FILE = 'data/payments.txt'
+BACKUP_FILE = 'data/payments_backup.txt'
+OUTPUT_DIRECTORY = Path('output')
+LOG_FILE = 'invoice_generator.log'
+
+# Date formats
+DATE_FORMAT = '%Y-%m-%d'
+MONTH_FORMAT = '%B %Y'
+
+# PDF file name formats
+INVOICE_FILE_FORMAT = 'invoice_{}.pdf'
+RECEIPT_FILE_FORMAT = 'receipt_{}.pdf'
+MERGED_INVOICE_FILE = 'merged_invoices.pdf'
+MERGED_RECEIPT_FILE = 'merged_receipts.pdf'
+SUMMARY_REPORT_FILE = 'summary_report.txt'
