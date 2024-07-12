@@ -36,17 +36,27 @@ def create_pdf(template_name, filename, data):
         }
         h1 {
             color: #2c3e50;
+            margin-bottom: 0.5em;
         }
-        .details, .from-to {
+        .details {
             margin-bottom: 20px;
             line-height: 1.8;
         }
         .from-to {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .from-to > div {
+            width: 48%;
         }
         .address {
             white-space: pre-line;
+            line-height: 1.4;
+        }
+        .address-label {
+            font-weight: bold;
+            margin-bottom: 0.5em;
         }
         .table-container {
             position: relative;
